@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +35,8 @@ class LinkPreview {
       );
 
       final mimeType = response.headers['content-type'] ?? '';
-      final data = response.body;
+//       final data = response.body;
+      final data = utf8.decode(response.bodyBytes);
       final doc = parseHtmlDocument(data);
 
       if (LinkPreviewScrapper.isMimeVideo(mimeType)) {
